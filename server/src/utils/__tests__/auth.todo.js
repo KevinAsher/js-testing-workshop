@@ -1,41 +1,34 @@
-import { isPasswordAllowed, userToJSON } from '../auth';
+import {isPasswordAllowed, userToJSON} from '../auth'
 
 describe('isPasswordAllowed', () => {
   const allowedPasswords = ['ASDFLJ32.3dksfjkjf']
-  const disallowedPasswords = [
-    '',
-    'fffffff',
-    '888888888'
-  ];
+  const disallowedPasswords = ['', 'fffffff', '888888888']
 
-  allowedPasswords.forEach((pwd) => {
+  allowedPasswords.forEach(pwd => {
     it(`"${pwd}" should be allowed`, () => {
-      expect(isPasswordAllowed(pwd)).toBe(true);
-
+      expect(isPasswordAllowed(pwd)).toBe(true)
     })
   })
 
-  disallowedPasswords.forEach((pwd) => {
+  disallowedPasswords.forEach(pwd => {
     it(`"${pwd}" should be disallowed`, () => {
-      expect(isPasswordAllowed(pwd)).toBe(false);
-
+      expect(isPasswordAllowed(pwd)).toBe(false)
     })
   })
-
 })
 
 test.skip('isPasswordAllowed only allows some passwords', () => {
   // here's where I'll demo things for you :)
-  expect(isPasswordAllowed('')).toBe(false);
-  expect(isPasswordAllowed('fffffff')).toBe(false);
-  expect(isPasswordAllowed('888888888')).toBe(false);
-  expect(isPasswordAllowed('ASDFLJ32.3dksfjkjf')).toBe(true);
+  expect(isPasswordAllowed('')).toBe(false)
+  expect(isPasswordAllowed('fffffff')).toBe(false)
+  expect(isPasswordAllowed('888888888')).toBe(false)
+  expect(isPasswordAllowed('ASDFLJ32.3dksfjkjf')).toBe(true)
 })
 
 test('userToJSON excludes secure properties', () => {
   const safeUser = {
     id: 'some-id',
-    username: 'sarah',    
+    username: 'sarah',
   }
 
   const user = {
@@ -44,9 +37,9 @@ test('userToJSON excludes secure properties', () => {
     iat: new Date(),
     hash: 'some really long string',
     salt: 'some shorter string',
-  };
+  }
 
-  expect(userToJSON(user)).toEqual(safeUser);
+  expect(userToJSON(user)).toEqual(safeUser)
 })
 
 //////// Elaboration & Feedback /////////
